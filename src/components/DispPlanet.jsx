@@ -1,18 +1,22 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 const DispPlanet = (props) => {
     const response = props.response;
     const setResponse = props.setResponse;
     const {searchID} = useParams();
+    const history = useHistory();
     useEffect(() => {
+        console.log("USEEFFECT RAN!!!!");
         axios.get('https://swapi.dev/api/planets/'+searchID)
     .then(res => {
         setResponse(res.data);
     })
-    .catch(err => console.log(err))},
-    []);
+    .catch(err => {
+        history.push(`/error`);
+    })},
+    [searchID]);
 
     return (
         <div>

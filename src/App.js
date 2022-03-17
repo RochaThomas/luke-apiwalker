@@ -4,10 +4,11 @@ import {Route, Switch} from 'react-router-dom';
 import InputForm from './components/InputForm';
 import DispPerson from './components/DispPerson';
 import DispPlanet from './components/DispPlanet';
+import DispError from './components/DispError';
 
 function App() {
 
-  const [response, setResponse] =  useState([]);
+  const [response, setResponse] =  useState({});
   const [searchType, setSearchType] = useState('people');
   const [searchID, setSearchID] = useState('1');
 
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path={'/planets/:searchID'}>
             <DispPlanet setResponse={setResponse} response={response}/>
+          </Route>
+          <Route path={'/error'}>
+            <DispError/>
           </Route>
         </Switch>
       </fieldset>

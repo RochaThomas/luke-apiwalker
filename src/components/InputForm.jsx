@@ -11,6 +11,8 @@ const InputForm = (props) => {
 
     const handleRequestClick = (e) => {
         e.preventDefault();
+        console.log("this is the search type:", searchType);
+        console.log("this is the search ID:", searchID);
         history.push(`/${searchType}/${searchID}`);
     }
 
