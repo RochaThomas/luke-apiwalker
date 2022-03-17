@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Route, Switch} from 'react-router-dom';
+import InputForm from './components/InputForm';
+import DispPerson from './components/DispPerson';
+import DispPlanet from './components/DispPlanet';
 
 function App() {
+
+  const [response, setResponse] =  useState([]);
+  const [searchType, setSearchType] = useState('people');
+  const [searchID, setSearchID] = useState('1');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <fieldset>
+        <legend>InputForm.jsx</legend>
+        <InputForm setSearchType={setSearchType} setSearchID={setSearchID} searchType={searchType} searchID={searchID}/>
+      </fieldset>
+      <fieldset>
+        <legend>DispPerson.jsx</legend>
+        <Switch>
+          <Route path={'/people/:searchID'}>
+            <DispPerson setResponse={setResponse} response={response}/>
+          </Route>
+          <Route path={'/planets/:searchID'}>
+            <DispPlanet setResponse={setResponse} response={response}/>
+          </Route>
+        </Switch>
+      </fieldset>
     </div>
   );
 }
